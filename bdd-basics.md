@@ -5,7 +5,6 @@ theme: Poster, 1
 ### @garyfleming
 
 ^ Intro
-^ TODO Vending machine kata as our main example?
 
 ---
 
@@ -20,7 +19,9 @@ theme: Poster, 1
 
 ^  - TDD drives concrete design from specs
 ^  - BDD helps build that spec in the large (i.e. system level)
-^  - Double-loop Process (TODO Add an image of the double loop here!)
+^  - Double-loop Process 
+
+^ Double loop: find stories, verify, create, verify, create
 
 ---
 
@@ -129,35 +130,79 @@ theme: Poster, 1
 
 ## BDD is three practices
 
-  - Discovery - "Shared understanding is established through collaboration and structured conversations"
-  - Formulation - "Examples of system behaviour are documented as scenarios"
-  - Automation - "Scenarios are automated to be able to verify the system's behaviour"
+  - Discovery
+  - Formulation
+  - Automation
 
+^ Three practices. If you do these practices in a disciplined way, you're more likely to have good outcomes.
 
 ---
 
 ## Discovery
 ### A way of thinking about and exploring the behaviours we want in our systems
 
-^ TODO expand on this. Show example mapping
+^ "Shared understanding is established through collaboration and structured conversations"
+^ Three amigos. Structured conversations.
+^ Not trying to word lawyer! just capturing example
+
+---
+
+![fit original](images/example-mapping-vending-machine.png)
+
+^ Explain. Not given/when/then. Quick examples. Questions etc
+^ Consequences of too many of each.
+^ Timeboxed.
 
 ---
 
 ## Formulation
 ### A way of writing down the behaviours in a clear way that we can all agree on 
 
-^ TODO expand on this. Show writing gherking scenario. Consider writing a bad scenario (all impl), showing BRIEF, and then making it BRIEF
+^ "Examples of system behaviour are documented as scenarios"
+^ Think we've refined and aligned in Discovery, answered enough questions. Time to Formulate.
+
+---
+
+```
+SCENARIO: sc_1_4_75_for_100_choc_fail
+GIVEN vending machine has stock
+AND vending machine has no coins
+AND customer inserts a nickel
+AND customer inserts a nickel
+AND customer inserts a quarter
+AND customer inserts a quarter
+AND customer inserts a nickel
+WHEN customer presses button "A"
+AND customer presses button "1"
+AND customer presses button "4"
+AND customer presses button "vend"
+THEN the screen says "Please insert another 25 cents"
+```
 
 ---
 
 # BRIEF 
-  - Business Language - Aids cross-discipline collaboration
-  - Real data - Reveal assumptions and edge cases
-  - Intention Revealing - Describe desired outcomes, rather than implementation
-  - Essential - Skip anything that isn't directly about the behaviour
-  - Focused - Each scenario should only be about one rule
+  - Business Language 
+  - Real data 
+  - Intention Revealing 
+  - Essential 
+  - Focused
 
 ^ Acronym used to help make scenarios we right focussed in the right way
+^ Aids cross-discipline collaboration
+^ Reveal assumptions and edge cases
+^ Describe desired outcomes, rather than implementation
+^ Skip anything that isn't directly about the behaviour
+^ Each scenario should only be about one rule
+
+---
+
+```
+SCENARIO: customer hasn't paid enough
+GIVEN the customer has inserted 75 cents
+WHEN customer picks a one dollar chocolate bar
+THEN the screen says "Please insert another 25 cents"
+```
 
 ---
 
@@ -165,8 +210,27 @@ theme: Poster, 1
 ### A way of ensuring those behaviours are verified in the system, using tooling.
 
 ^ The easy part if we've done the rest right!
+^ "Scenarios are automated to be able to verify the system's behaviour"
 ^ Tools like Cucumber or SpecFlow take our scenarios and match them up to methods in our test code.
 ^ Show an example match.
+
+---
+
+```
+centsInserted = 0;
+
+Given('customer has inserted {int} cents', function (cents) {
+  this.centsInserted = cents;
+});
+```
+
+---
+
+## BDD is three practices
+
+  - Discovery - e.g example mapping
+  - Formulation - e.g. scenario writing
+  - Automation - e.g. using a tool like Cucumber/SpecFlow
 
 ---
 
