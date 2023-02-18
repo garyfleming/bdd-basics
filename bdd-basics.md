@@ -167,11 +167,11 @@ theme: Poster, 1
 SCENARIO: sc_1_4_75_for_100_choc_fail
 GIVEN vending machine has stock
 AND vending machine has no coins
-AND customer inserts a nickel
-AND customer inserts a nickel
-AND customer inserts a quarter
-AND customer inserts a quarter
-AND customer inserts a nickel
+AND customer inserts a coin of value "5"
+AND customer inserts a coin of value "10"
+AND customer inserts a coin of value "10"
+AND customer inserts a coin of value "25"
+AND customer inserts a coin of value "25
 WHEN customer presses button "A"
 AND customer presses button "1"
 AND customer presses button "4"
